@@ -1,0 +1,7 @@
+/* Force sections marked hidden to remain hidden despite layout display rules. */
+[hidden] { display: none !important; }
+
+.axon-logo { font-size: 21px; letter-spacing: -.7px; white-space: nowrap; }
+
+.auth-switch { margin: 20px 0 0; text-align: center; color: var(--muted); }
+.auth-switch button { padding: 0; border: 0; background: none; color: var(--brand); font-weight: 750; }
