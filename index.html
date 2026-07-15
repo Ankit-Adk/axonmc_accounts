@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Offline accounting dashboard stored in your browser.">
+  <title>Axon MC Accounts — Admin</title>
+  <link rel="stylesheet" href="assets/css/app.css">
+  <link rel="stylesheet" href="assets/css/fixes.css">
+</head>
+<body>
+  <div class="app" id="app-view">
+    <aside id="sidebar" class="sidebar">
+      <div class="sidebar-top"><a class="logo axon-logo" href="#dashboard">Axon MC <span>Accounts</span></a><button id="close-menu" class="icon-button close-menu" aria-label="Close menu">×</button></div>
+      <p class="sidebar-label">ADMIN WORKSPACE</p>
+      <nav><a class="nav-link active" href="#dashboard">Dashboard</a><a class="nav-link" href="#manage">Manage records</a></nav>
+    </aside>
+    <main class="content-area">
+      <header class="topbar"><button id="menu-button" class="icon-button menu-button" aria-label="Open menu">☰</button><div><h1 id="page-title">Admin dashboard</h1><p id="today"></p></div><button id="theme-button" class="icon-button" aria-label="Toggle dark mode">◐</button></header>
+      <section class="page-content">
+        <div id="app-message" class="message" role="status" hidden></div>
+        <section id="dashboard-section" class="view-section">
+          <div class="stats"><article class="stat-card income-card"><span>Total income</span><strong id="total-income">0.00</strong></article><article class="stat-card expense-card"><span>Total expenses</span><strong id="total-expenses">0.00</strong></article><article class="stat-card balance-card"><span>Current balance</span><strong id="total-balance">0.00</strong></article><article class="stat-card"><span>Total transactions</span><strong id="total-transactions">0</strong></article></div>
+          <div class="filters"><input id="search-input" type="search" placeholder="Search sender, reason, or currency"><input id="date-input" type="date"><button id="clear-filters" class="button secondary" type="button">Clear</button></div>
+          <div class="record-grid"><section class="table-card"><div class="card-heading"><h2>Income</h2><span id="income-count"></span></div><div class="table-wrap"><table><thead><tr><th>Date</th><th>Sender / From</th><th>Amount</th><th>Currency</th><th>Reason</th></tr></thead><tbody id="income-table"></tbody></table></div></section><section class="table-card"><div class="card-heading"><h2>Expenses</h2><span id="expense-count"></span></div><div class="table-wrap"><table><thead><tr><th>Date</th><th>Paid to</th><th>Amount</th><th>Currency</th><th>Reason</th></tr></thead><tbody id="expense-table"></tbody></table></div></section></div>
+        </section>
+        <section id="manage-section" class="view-section" hidden>
+          <div class="manage-bar"><div><h2>Manage records</h2><p class="muted">Add, update, or remove accounting transactions.</p></div><div class="button-row"><button id="add-income" class="button primary">+ Add income</button><button id="add-expense" class="button primary">+ Add expense</button></div></div>
+          <div class="manage-table table-card"><div class="card-heading"><h2>Income records</h2></div><div class="table-wrap"><table><thead><tr><th>Date</th><th>Sender</th><th>Amount</th><th>Currency</th><th>Reason</th><th>Actions</th></tr></thead><tbody id="manage-income"></tbody></table></div></div>
+          <div class="manage-table table-card"><div class="card-heading"><h2>Expense records</h2></div><div class="table-wrap"><table><thead><tr><th>Date</th><th>Paid to</th><th>Amount</th><th>Currency</th><th>Reason</th><th>Actions</th></tr></thead><tbody id="manage-expense"></tbody></table></div></div>
+          <section class="backup-card"><div><h2>Backup &amp; restore</h2><p class="muted">Export or restore your accounting records as JSON.</p></div><div class="button-row"><button id="export-button" class="button secondary">Export JSON</button><label class="button secondary file-button">Import JSON<input id="import-input" type="file" accept="application/json,.json"></label></div></section>
+        </section>
+      </section>
+    </main>
+  </div>
+  <dialog id="record-dialog"><form id="record-form" method="dialog" class="modal-form"><div class="modal-heading"><h2 id="record-modal-title">Add income</h2><button class="icon-button" type="button" data-close-dialog aria-label="Close">×</button></div><input id="record-id" type="hidden"><input id="record-type" type="hidden"><label>Date<input id="record-date" type="date" required></label><label id="party-label">Sender<input id="record-party" type="text" required maxlength="120"></label><label>Amount<input id="record-amount" type="number" required min="0.01" step="0.01"></label><label>Currency<input id="record-currency" type="text" required value="USD" minlength="3" maxlength="10" pattern="[A-Za-z]{3,10}"></label><label>Reason / Description<textarea id="record-reason" required maxlength="500"></textarea></label><div class="modal-actions"><button class="button secondary" type="button" data-close-dialog>Cancel</button><button class="button primary" type="submit">Save record</button></div></form></dialog>
+  <script src="assets/js/app.js"></script>
+</body>
+</html>
